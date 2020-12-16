@@ -18,7 +18,14 @@ public class LoginSer extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int result = UserService.login(request);
 		
+		if(result == 1) {
+			response.sendRedirect("/loginChk.jsp");
+			return;
+		}
+		
+		System.out.println("로그인result = " + result);
 	}
 
 }
