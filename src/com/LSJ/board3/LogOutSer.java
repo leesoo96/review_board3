@@ -1,4 +1,4 @@
-package com.LSJ.board3.user;
+package com.LSJ.board3;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -6,26 +6,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.LSJ.board3.common.Utils;
-
-@WebServlet("/join")
-public class JoinSer extends HttpServlet {
+@WebServlet("/logout")
+public class LogOutSer extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(!Utils.isLogout(request)) { 
-			response.sendRedirect("/main");
-			return;
-		} // 로그인했을 경우 main으로 이동
-		
-		Utils.forward("회원가입", "user/join", request, response);
+		HttpSession session = request.getSession();
+		session.invalidate(); // 세션에 저장되어있는 키와 값 전부 제거
+
+		response.sendRedirect("/login");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int result = UserService.join(request);
 		
-		response.sendRedirect("/login");
 	}
 
 }

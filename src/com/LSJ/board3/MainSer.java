@@ -1,4 +1,4 @@
-package com.LSJ.board3.user;
+package com.LSJ.board3;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -9,23 +9,21 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.LSJ.board3.common.Utils;
 
-@WebServlet("/join")
-public class JoinSer extends HttpServlet {
+// 메인페이지 서블릿
+@WebServlet("/main")
+public class MainSer extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(!Utils.isLogout(request)) { 
-			response.sendRedirect("/main");
+		if(Utils.isLogout(request)) { 
+			response.sendRedirect("/login");
 			return;
-		} // 로그인했을 경우 main으로 이동
-		
-		Utils.forward("회원가입", "user/join", request, response);
+		} // 로그인 상태가 아닌 경우 로그인 페이지로 이동
+                                      // 공통페이지               // 메인페이지
+		Utils.forwardTemp("메인페이지", "temp/basic_temp", "main", request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int result = UserService.join(request);
 		
-		response.sendRedirect("/login");
 	}
-
 }

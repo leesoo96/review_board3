@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 
 public class CommonDAO {
-
+//	insert, delete, update 
 	public static int executeUpdate(String sql, SQLInterUpdate siu) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
