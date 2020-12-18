@@ -10,17 +10,6 @@ import javax.servlet.http.HttpSession;
 import com.LSJ.board3.model.UserModel;
 
 public class Utils {
-
-//	true : 로그아웃 / false : 로그인
-	public static boolean isLogout(HttpServletRequest request) {
-		return getLogin(request) == null;
-	}
-	
-	public static UserModel getLogin(HttpServletRequest request) {
-		HttpSession session = request.getSession();
-//		세션 값 유지
-		return (UserModel) session.getAttribute("loginUser");
-	}
 	
 //	Template.jsp(공통페이지) 전용
 	public static void forwardTemp(String title, String openPage, String innerPage, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

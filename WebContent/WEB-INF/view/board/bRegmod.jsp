@@ -6,10 +6,10 @@
 	<input type="hidden" name="i_board" value="${data.i_board }">
 	<input type="hidden" name="typ" value="${typ }">
 	<div>
-		제목 <input type="text" name="title" value="${data.title }">
+		제목 <input type="text" name="title" value="${data.title }" required>
 	</div>
 	<div>
-		내용 <textarea name="ctnt">${data.ctnt }</textarea>
+		내용 <textarea name="ctnt" required>${data.ctnt }</textarea>
 	</div>
 	<div>
 		<input type="submit" value="확인">

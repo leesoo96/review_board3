@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.LSJ.board3.common.SecurityUtils;
 import com.LSJ.board3.common.Utils;
 
 // 메인페이지 서블릿
@@ -15,7 +16,7 @@ public class MainSer extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(Utils.isLogout(request)) { 
+		if(SecurityUtils.isLogout(request)) { 
 			response.sendRedirect("/login");
 			return;
 		} // 로그인 상태가 아닌 경우 로그인 페이지로 이동

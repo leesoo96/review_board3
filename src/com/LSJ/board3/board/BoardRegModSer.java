@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.LSJ.board3.common.SecurityUtils;
 import com.LSJ.board3.common.Utils;
 
 @WebServlet("/board/bRegmod")
@@ -14,13 +15,15 @@ public class BoardRegModSer extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(Utils.isLogout(request)) {
+		int typ = Utils.getIntParam(request, "typ");
+		
+		if(SecurityUtils.isLogout(request)) {
 			response.sendRedirect("/login");
 			return;
 		}
 		
 		request.setAttribute("jsList", new String[] {"board"});
-		
+		request.setAttribute("typ", typ);
 
 		Utils.forwardTemp("등록/수정", "temp/basic_temp", "board/bRegmod", request, response);
 	}
