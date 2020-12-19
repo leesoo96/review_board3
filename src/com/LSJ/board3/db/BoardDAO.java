@@ -53,4 +53,45 @@ public class BoardDAO extends CommonDAO{
 		
 		return list;
 	}
+	
+//	글 읽기
+	public static BoardSEL readCtnt(BoardParam param) {
+		BoardSEL sel = null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = " SELECT A.typ, A.seq, A.title, A.ctnt, "
+				 	 + " A.r_dt, A.hits, A.i_user, B.nm "
+				 	 + " FROM t_board A "
+				 	 + " INNER JOIN t_user B "
+				 	 + " ON A.i_user = B.i_user " 
+				 	 + " WHERE A.i_board = ? ";
+		
+		try {
+			conn = DBUtils.getConn();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, param.getI_board());
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				sel = new BoardSEL();
+				
+				sel.setI_board(param.getI_board());
+				sel.setTyp(rs.getInt("typ"));
+				sel.setSeq(rs.getInt("seq"));
+				sel.setTitle(rs.getNString("title"));
+				sel.setCtnt(rs.getNString("ctnt"));
+				sel.setR_dt(rs.getString("r_dt"));
+				sel.setHits(rs.getInt("hits"));
+				sel.setI_user(rs.getInt("i_user"));
+				sel.setNm(rs.getNString("nm"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBUtils.close(conn, pstmt, rs);
+		}
+		
+		return sel;
+	}
 }

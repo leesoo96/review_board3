@@ -6,9 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>${title }</title>
-<link rel="stylesheet" href="/res/css/common.css?ver=3">
+<link rel="stylesheet" href="/res/css/common.css?ver=1">
 <c:forEach items="${jsList }" var="item">
-	<script defer src="/res/js/${item }.js"></script>
+	<script defer src="/res/js/${item }.js?ver=1"></script>
 </c:forEach>
 <script defer src="/res/js/common.js"></script>
 </head>
@@ -17,7 +17,7 @@
 		<header>
 			<ul>
 			<!-- loginUser => UserService.login에서 정해줌 -->
-			  <li><a href="/main">${loginUser.nm } 님, 환영합니다!</a></li>
+			  <li class="intro"><a href="/main">${loginUser.nm } 님, 환영합니다!</a></li>
 			  <li><a href="/logout">로그아웃</a></li>
 			  <li><a href="/board/list?typ=1">게임</a></li>
 			  <li><a href="/board/list?typ=2">스포츠</a></li>

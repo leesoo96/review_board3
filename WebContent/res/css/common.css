@@ -30,7 +30,7 @@ a {
 
 header {
 	background-color: #C3E3FF;
-	height: 50px;
+	height: 66px;
 }
 header ul {
 	list-style: none;
@@ -43,17 +43,21 @@ header ul:after {
 header li {
 	float: left;
 	width: 110px;
-	height: 50px;
+	height: 66px;
 }
-header li:hover {
-	background-color: #F7F0FF;
+header a:hover {
+	color: #6F00FF;
 }
 header a {
 	display: block;
 	color: black;
 	font-size: 18px;
 	text-align: center;
-	padding-top: 16px; 
+	padding-top: 22px; 
+	margin-left: 5px;
+}
+.intro {
+	width: auto;
 }
 
 #container section {

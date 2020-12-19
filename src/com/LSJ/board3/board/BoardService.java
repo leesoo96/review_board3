@@ -25,6 +25,15 @@ public class BoardService {
 		return BoardDAO.showListAll(param);
 	}
 	
+//	글 읽기
+	public static BoardSEL read(HttpServletRequest request) {
+		int i_board = Utils.getIntParam(request, "i_board");
+		
+		BoardParam param = new BoardParam();
+		param.setI_board(i_board);
+		
+		return BoardDAO.readCtnt(param);
+	}
 	
 //	글 등록 / 글 수정
 	public static int regMod(HttpServletRequest request) {
@@ -60,5 +69,24 @@ public class BoardService {
 		}
 		
 		return 0;
+	}
+	
+//	글 삭제
+	public static int delCtnt(HttpServletRequest request) {
+		int i_board = Utils.getIntParam(request, "i_board");
+		int i_user = SecurityUtils.getLogin_user(request);
+		
+		String sql = " DELETE FROM t_board "
+					 + " WHERE i_board = ? "
+					 + " AND i_user = ? ";
+	
+		return BoardDAO.executeUpdate(sql, new SQLInterUpdate() {
+			
+			@Override
+			public void proc(PreparedStatement pstmt) throws SQLException {
+				pstmt.setInt(1, i_board);
+				pstmt.setInt(2, i_user);
+			}
+		});
 	}
 }
