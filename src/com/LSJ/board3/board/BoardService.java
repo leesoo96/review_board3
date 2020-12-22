@@ -36,7 +36,7 @@ public class BoardService {
 	}
 	
 //	글 등록 / 글 수정
-	public static int regMod(HttpServletRequest request) {
+	public static String regMod(HttpServletRequest request) {
 		int i_board = Utils.getIntParam(request, "i_board");
 		int typ = Utils.getIntParam(request, "typ");
 		String title = request.getParameter("title");
@@ -64,11 +64,25 @@ public class BoardService {
 					pstmt.setInt(5, typ);
 				}
 			});
+		  return "list?typ=" + typ;
 		}else {
-//			TODO 글 수정
+			String sql = "UPDATE t_board SET "
+						  + " title = ?, ctnt = ? "
+						  + " WHERE i_board = ? "
+						  + " AND i_user = ? ";
+			
+			BoardDAO.executeUpdate(sql, new SQLInterUpdate() {
+				
+				@Override
+				public void proc(PreparedStatement pstmt) throws SQLException {
+					pstmt.setNString(1, title);
+					pstmt.setNString(2, ctnt);
+					pstmt.setInt(3, i_board);
+					pstmt.setInt(4, SecurityUtils.getLogin_user(request));
+				}
+			});
+		  return "bDetail?i_board=" + i_board;
 		}
-		
-		return 0;
 	}
 	
 //	글 삭제

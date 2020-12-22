@@ -22,6 +22,11 @@ public class BoardRegModSer extends HttpServlet {
 			return;
 		}
 		
+		int i_board = Utils.getIntParam(request, "i_board");
+		if(i_board > 0) {
+			request.setAttribute("data", BoardService.read(request));
+		}
+		
 		request.setAttribute("jsList", new String[] {"board"});
 		request.setAttribute("typ", typ);
 
@@ -29,10 +34,7 @@ public class BoardRegModSer extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int result = BoardService.regMod(request);
-		
-		int typ = Utils.getIntParam(request, "typ");
-		response.sendRedirect("list?typ=" + typ);
+		response.sendRedirect(BoardService.regMod(request));
 	}
 
 }

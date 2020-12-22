@@ -3,7 +3,14 @@ package com.LSJ.board3.model;
 public class BoardParam {
 	private int i_board;
 	private int typ;
+	private int i_cmt;
 	
+	public int getI_cmt() {
+		return i_cmt;
+	}
+	public void setI_cmt(int i_cmt) {
+		this.i_cmt = i_cmt;
+	}
 	public int getI_board() {
 		return i_board;
 	}

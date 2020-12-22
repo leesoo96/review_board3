@@ -24,25 +24,26 @@
 
 	<div style="margin-top: 10px;">
 		<div>
-			<form action="/cmt" method="post">
+			<form action="cmt/reg" method="post">
 				<input type="hidden" name="typ" value="${data.typ }">
 				<input type="hidden" name="i_board" value="${data.i_board }">
-				댓글 : <input type="text" name="cmt_ctnt">
+				댓글 : <input type="text" name="ctnt">
 				<input type="submit" value="댓글 쓰기">
 			</form>
 		</div>
-	
-		<div style="margin-top: 10px;">
-		<table>
-			<tr>
-				<th>[댓글 목록]</th>
-			</tr>
-			<c:forEach items="${cmtCtnt }" var="cmt">
-				<tr>
-					<td>${cmt.ctnt }</td>
-				</tr>
-			</c:forEach>
-		</table>
-		</div>
+		
+			<div style="margin-top: 10px;">
+				<table>
+					<tr>
+						<th>${cmtCtnt == null ? '현재 댓글이 없습니다. 첫 댓글을 달아주세요!' :
+						 '[댓글목록]' }</th>
+					</tr>
+				<c:forEach items="${cmtCtnt }" var="cmt">
+					<tr>
+						<td>${cmt.ctnt }</td>
+					</tr>
+				</c:forEach>
+				</table>
+			</div>
 	</div>
 </div>
