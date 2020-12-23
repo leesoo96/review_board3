@@ -8,7 +8,7 @@
 <title>${title }</title>
 <link rel="stylesheet" href="/res/css/common.css?ver=1">
 <c:forEach items="${jsList }" var="item">
-	<script defer src="/res/js/${item }.js?ver=1"></script>
+	<script defer src="/res/js/${item }.js?ver=2"></script>
 </c:forEach>
 <script defer src="/res/js/common.js"></script>
 </head>

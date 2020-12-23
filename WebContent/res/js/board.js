@@ -12,8 +12,15 @@ function chk(){
 }
 
 // 글 삭제
-function delConfrim(i_board, typ){
+function delConfirm(i_board, typ){
 	if(confirm('정말 삭제하시겠습니까?')){
 		location.href = `bDel?i_board=${i_board}&typ=${typ}`;	
+	}
+}
+
+// 댓글 삭제
+function delCmtConfirm(i_cmt, i_board) {
+	if(confirm('정말 삭제하시겠습니까?')){
+		location.href = `cmt/del?i_cmt=${i_cmt}&i_board=${i_board}`;	
 	}
 }

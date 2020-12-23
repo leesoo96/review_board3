@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<link rel="stylesheet" href="/res/css/bDetail.css">
+<link rel="stylesheet" href="/res/css/bDetail.css?var=1">
 
 <div id="ctntWrap">
 	<a href="list?typ=${data.typ}">목록으로 돌아가기</a>
@@ -17,7 +17,7 @@
 	<a href="bRegmod?i_board=${data.i_board}">
 		<button>수정하기</button>
 	</a>
-	<button onclick="delConfrim(${data.i_board}, ${data.typ});">
+	<button onclick="delConfirm(${data.i_board}, ${data.typ});">
 		삭제하기
 	</button>
 </c:if>
@@ -33,14 +33,24 @@
 		</div>
 		
 			<div style="margin-top: 10px;">
-				<table>
+				<strong>[댓글목록]</strong>
+				<table class="cmtTable">
 					<tr>
-						<th>${cmtCtnt == null ? '현재 댓글이 없습니다. 첫 댓글을 달아주세요!' :
-						 '[댓글목록]' }</th>
+						<td>작성자</td>
+						<td>댓글</td>
+						<td>댓글작성시간</td>
 					</tr>
 				<c:forEach items="${cmtCtnt }" var="cmt">
 					<tr>
+						<td>${cmt.user_nm }</td>
 						<td>${cmt.ctnt }</td>
+						<td>${cmt.r_dt }</td>
+						<td>
+						<c:if test="${cmt.i_user == loginUser.i_user }">
+							<a href="cmt/mod"><button>수정</button></a>
+							<button onclick="delCmtConfirm(${cmt.i_cmt}, ${data.i_board });">삭제</button>
+						</c:if>
+						</td>
 					</tr>
 				</c:forEach>
 				</table>

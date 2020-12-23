@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.LSJ.board3.board.cmt.BoardCmtService;
 import com.LSJ.board3.common.SecurityUtils;
 import com.LSJ.board3.common.Utils;
 import com.LSJ.board3.db.BoardDAO;
@@ -31,6 +32,8 @@ public class BoardService {
 		
 		BoardParam param = new BoardParam();
 		param.setI_board(i_board);
+		
+		request.setAttribute("cmtCtnt", BoardCmtService.showCmtList(param));
 		
 		return BoardDAO.readCtnt(param);
 	}

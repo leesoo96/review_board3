@@ -7,19 +7,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.LSJ.board3.board.BoardService;
-import com.LSJ.board3.common.SecurityUtils;
-import com.LSJ.board3.common.Utils;
-
-@WebServlet("/board/cmt/reg")
-public class BoardCmtRegSer extends HttpServlet {
+@WebServlet("/board/cmt/mod")
+public class BoardCmtMod extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+	}
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(SecurityUtils.isLogout(request)) {  
-			response.sendRedirect("/login"); 
-			return;
-		}
-		response.sendRedirect(BoardCmtService.insertCmt(request));
+		
 	}
 }
