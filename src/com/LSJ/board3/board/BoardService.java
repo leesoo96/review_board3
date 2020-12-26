@@ -32,6 +32,7 @@ public class BoardService {
 		
 		BoardParam param = new BoardParam();
 		param.setI_board(i_board);
+		param.setI_user(SecurityUtils.getLogin_user(request));
 		
 		request.setAttribute("cmtCtnt", BoardCmtService.showCmtList(param));
 		
@@ -105,5 +106,40 @@ public class BoardService {
 				pstmt.setInt(2, i_user);
 			}
 		});
+	}
+	
+//	좋아요 
+	public static String ajax_thumbsUp(HttpServletRequest request) {
+		int result = 0;
+		int state = Utils.getIntParam(request, "state");
+		int i_board = Utils.getIntParam(request, "i_board");
+		int i_user = SecurityUtils.getLogin_user(request);
+		
+		String sql = "";
+		
+		switch (state) {
+		case 0: // 좋아요 해제
+			sql = " DELETE FROM t_board_fav "
+				  + " WHERE i_board = ? "
+				  + " AND i_user = ? ";
+			break;
+
+		case 1: // 좋아요 클릭
+			sql = " INSERT INTO t_board_fav "
+				  + " (i_board, i_user) "
+				  + " VALUES (?, ?) ";
+			break;
+		}
+		
+		result = BoardDAO.executeUpdate(sql, new SQLInterUpdate() {
+			
+			@Override
+			public void proc(PreparedStatement pstmt) throws SQLException {
+				pstmt.setInt(1, i_board);
+				pstmt.setInt(2, i_user);
+			}
+		});
+		
+		return String.format("{ \"result\" : %d}", result);
 	}
 }

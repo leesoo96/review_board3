@@ -25,7 +25,7 @@ public class BoardDetailSer extends HttpServlet {
 		
 		BoardSEL data = BoardService.read(request);
 		request.setAttribute("data", data);
-		
+	
 		Utils.forwardTemp(data.getTitle(), "temp/basic_temp", "board/bDetail", request, response);
 	}
 	

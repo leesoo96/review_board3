@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+#ctntWrap {
+	margin: 24px;
+}
+#ctntWrap div:nth-of-type(1) {
+	margin-top: 5px;
+}
+
+.cmtFrm {
+	display: none;
+}
+.cmtTable, tr, td {
+	text-align: center;
+}
+
+#thumbsUp {
+	position: absolute;
+	top: 99px; left: 163px;
+	cursor: pointer;
+	color: #8790FF;
+	font-size: 29px;
+}

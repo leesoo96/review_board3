@@ -24,3 +24,44 @@ function delCmtConfirm(i_cmt, i_board) {
 		location.href = `cmt/del?i_cmt=${i_cmt}&i_board=${i_board}`;	
 	}
 }
+
+// 댓글 수정버튼 이벤트
+function cmtMod(i_cmt){
+	var modFrm = document.querySelector('#mod_'+i_cmt);
+	modFrm.classList.remove('cmtFrm');	
+}
+function cmtModClose(i_cmt){
+	var modFrm = document.querySelector('#mod_'+i_cmt);
+	modFrm.classList.add('cmtFrm');
+}
+
+// 좋아요
+function toggle_thumbsUp(i_board){
+	var thumbs = document.querySelector('#thumbsUp');
+	var state = thumbs.getAttribute('is_thumbsUp');
+	console.log('state = ' + state);
+	// 좋아요X - 0 / 좋아요O - 1
+	
+	state = 1 - state;
+	
+	// get 방식으로 ajax 통신
+	axios.get('/board/ajax_thumbsUp', {
+		params : {
+			state: state,
+			i_board : i_board
+		}
+	}).then(function(res){
+		console.log('res = ' + res);
+		
+		if(res.data.result == 1){
+			var thumbsUp = state == 1 ? 'fas' : 'far';
+			
+			thumbs.innerHTML = `<i class="${thumbsUp} fa-thumbs-up"></i>`;
+			thumbs.setAttribute('is_thumbsUp', state);
+		}else {
+			alert('에러 발생');
+		}
+	}).catch(function(err){
+		console.log('에러 발생 : ' + err);
+	})
+}
